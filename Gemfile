@@ -22,5 +22,3 @@ gem 'csv', '~> 3.2', '>= 3.2.8'
 gem 'redis'
 
 gem 'gtfs'
-
-gem 'gtfs_stops_clustering', '~> 0.1.1'
