@@ -60,7 +60,7 @@ module GtfsStopsClustering
     end
   end
 
-  def gtfs_stops_clusters(gtfs_urls, epsilon, min_points, names_similarity = 1, stop_config_path = '')
+  def build(gtfs_urls, epsilon, min_points, names_similarity = 1, stop_config_path = '')
     @gtfs_stops_clustering = GtfsStopsClustering.new(gtfs_urls, epsilon, min_points, names_similarity, stop_config_path)
     @gtfs_stops_clustering.clusters
   end
