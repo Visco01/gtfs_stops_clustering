@@ -26,6 +26,6 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
     - name: Bundle
-        run: bundle install --full-index --force
+      run:  bundle install --full-index --force
     - name: Run tests
-        run: ruby test/test_gtfs_stops_clustering.rb
+      run: ruby test/test_gtfs_stops_clustering.rb
