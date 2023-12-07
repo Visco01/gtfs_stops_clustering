@@ -2,13 +2,14 @@
 # lib/gtfs_stops_clustering.rb
 require 'rubygems'
 require 'bundler/setup'
+require_relative "gtfs_stops_clustering/version"
 require 'gtfs'
 require 'csv'
 require_relative './gtfs_stops_clustering/data_import'
 require_relative './gtfs_stops_clustering/dbscan'
 
 module GtfsStopsClustering
-  VERSION='0.0.1'
+  VERSION = GtfsStopsClustering::VERSION
   attr_accessor :gtfs_stops_clustering
 
   class GtfsStopsClustering
