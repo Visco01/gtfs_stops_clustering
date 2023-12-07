@@ -1,5 +1,7 @@
+#!/usr/bin/env ruby
 # lib/gtfs_stops_clustering.rb
-
+require 'rubygems'
+require 'bundler/setup'
 require 'gtfs'
 require 'csv'
 require_relative './gtfs_stops_clustering/data_import'
