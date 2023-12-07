@@ -22,6 +22,17 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true
-    - name: Run the default task
-      run: bundle exec rake
+        bundler-cache: false
+    - name: Clear cache
+      run: |
+        sudo rm -rf $HOME/.rvm/gems     # Remove RVM gems cache
+        sudo rm -rf $HOME/.bundle       # Remove Bundler cache
+    - name: Redis Server
+      uses: supercharge/redis-github-action@1.7.0
+    - name: Bundle install
+      run: |
+        bundle install --full-index --redownload
+    - name: Run tests
+      run: ruby test/test_gtfs_stops_clustering.rb
+    # - name: Run the default task
+    #   run: bundle exec rake

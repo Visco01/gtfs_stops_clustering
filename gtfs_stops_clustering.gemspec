@@ -38,12 +38,12 @@ Gem::Specification.new do |spec|
                "lib/gtfs_stops_clustering/redis_geodata.rb",
                "lib/gtfs_stops_clustering/version.rb"]
 
+  spec.add_runtime_dependency 'gtfs', '~> 0.4.1'
   spec.add_runtime_dependency 'distance_measures', '~> 0.0.6'
   spec.add_runtime_dependency 'text', '~> 1.3', '>= 1.3.1'
   spec.add_runtime_dependency 'geocoder', '~> 1.8', '>= 1.8.2'
   spec.add_runtime_dependency 'csv', '~> 3.2', '>= 3.2.8'
   spec.add_runtime_dependency 'redis', '~> 5.0', '>= 5.0.8'
-  spec.add_runtime_dependency 'gtfs', '~> 0.4.1'
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
