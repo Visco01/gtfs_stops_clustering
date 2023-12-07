@@ -32,18 +32,19 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.files = ["lib/gtfs_stops_clustering.rb",
-               "lib/gtfs_stops_clustering/data_import.rb",
-               "lib/gtfs_stops_clustering/dbscan.rb",
-               "lib/gtfs_stops_clustering/redis_geodata.rb",
-               "lib/gtfs_stops_clustering/version.rb"]
+  spec.files = ["lib/gtfs_stops_clustering.rb", "lib/gtfs_stops_clustering/data_import.rb", "lib/gtfs_stops_clustering/dbscan.rb",
+                "lib/gtfs_stops_clustering/redis_geodata.rb", "lib/gtfs_stops_clustering/version.rb",
+                "lib/gtfs_stops_clustering/input_consistency_checks.rb"]
 
-  spec.add_runtime_dependency 'gtfs', '~> 0.4.1'
-  spec.add_runtime_dependency 'distance_measures', '~> 0.0.6'
-  spec.add_runtime_dependency 'text', '~> 1.3', '>= 1.3.1'
-  spec.add_runtime_dependency 'geocoder', '~> 1.8', '>= 1.8.2'
-  spec.add_runtime_dependency 'csv', '~> 3.2', '>= 3.2.8'
-  spec.add_runtime_dependency 'redis', '~> 5.0', '>= 5.0.8'
+  spec.add_runtime_dependency "csv", "~> 3.2", ">= 3.2.8"
+  spec.add_runtime_dependency "distance_measures", "~> 0.0.6"
+  spec.add_runtime_dependency "geocoder", "~> 1.8", ">= 1.8.2"
+  spec.add_runtime_dependency "gtfs", "~> 0.4.1"
+  spec.add_runtime_dependency "redis", "~> 5.0", ">= 5.0.8"
+  spec.add_runtime_dependency "text", "~> 1.3", ">= 1.3.1"
+
+  spec.add_development_dependency "minitest", "~> 5.20"
+  spec.add_development_dependency "pry", "~> 0.14.2"
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
