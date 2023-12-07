@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 # lib/data_import.rb
 
-require 'csv'
-require 'gtfs'
+require "csv"
+require "gtfs"
 
+# DataImport module
 module DataImport
-  VERSION='0.0.1'
   attr_accessor :data_import
 
+  # DataImport class
   class DataImport
     attr_accessor :stops, :stops_config_file, :stops_names, :stops_corner_cases, :stops_data, :stops_redis_geodata
 
@@ -22,13 +25,13 @@ module DataImport
     end
 
     def import_stops_corner_cases
-      if File.exist?(@stops_config_file)
-        CSV.foreach(@stops_config_file, headers: true) do |row|
-          stop_name = row['stop_name']
-          cluster_name = row['cluster_name']
+      return unless File.exist?(@stops_config_file)
 
-          stops_corner_cases << { stop_name: stop_name, cluster_name: cluster_name }
-        end
+      CSV.foreach(@stops_config_file, headers: true) do |row|
+        stop_name = row["stop_name"]
+        cluster_name = row["cluster_name"]
+
+        stops_corner_cases << { stop_name: stop_name, cluster_name: cluster_name }
       end
     end
 
@@ -38,12 +41,19 @@ module DataImport
         longitude = row.lon
         stop_name = row.name
 
-        stop_name = @stops_corner_cases.find { |entry| entry[:stop_name] == stop_name }[:cluster_name] if stops_corner_cases.find { |entry| entry[:stop_name] == stop_name }
+        stop_name = stop_name_from_corner_cases(stop_name)
 
         @stops_names << stop_name
         @stops_data << [latitude, longitude]
         @stops_redis_geodata << [longitude, latitude, "#{longitude},#{latitude}"]
       end
+    end
+
+    def stop_name_from_corner_cases(stop_name)
+      csv_entry = @stops_corner_cases.find do |entry|
+        entry[:stop_name] == stop_name
+      end
+      csv_entry.nil? ? stop_name : csv_entry[:cluster_name]
     end
   end
 
@@ -56,5 +66,3 @@ module DataImport
     }
   end
 end
-
-include DataImport
