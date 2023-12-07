@@ -17,6 +17,6 @@ gem 'geocoder', '~> 1.8', '>= 1.8.2'
 
 gem 'csv', '~> 3.2', '>= 3.2.8'
 
-gem 'redis'
+gem 'redis', '~> 5.0', '>= 5.0.8'
 
-gem 'gtfs'
+gem 'gtfs', '~> 0.4.1'
