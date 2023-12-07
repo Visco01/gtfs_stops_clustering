@@ -27,6 +27,8 @@ jobs:
       run: |
         sudo rm -rf $HOME/.rvm/gems     # Remove RVM gems cache
         sudo rm -rf $HOME/.bundle       # Remove Bundler cache
+    - name: Redis Server
+      uses: supercharge/redis-github-action@1.7.0
     - name: Bundle install
       run: |
         bundle install --full-index --redownload
