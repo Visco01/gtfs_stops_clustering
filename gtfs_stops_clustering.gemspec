@@ -4,7 +4,7 @@ require_relative "lib/gtfs_stops_clustering/version"
 
 Gem::Specification.new do |spec|
   spec.name = "gtfs_stops_clustering"
-  spec.version = '0.1.1'
+  spec.version = GtfsStopsClustering::VERSION
   spec.authors = ["Visco01"]
   spec.email = ["visconti373@gmail.com"]
 
