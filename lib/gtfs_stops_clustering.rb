@@ -8,7 +8,7 @@ require_relative './gtfs_stops_clustering/data_import'
 require_relative './gtfs_stops_clustering/dbscan'
 
 module GtfsStopsClustering
-  VERSION='0.1.2'
+  VERSION='0.1.3'
   attr_accessor :gtfs_stops_clustering
 
   class GtfsStopsClustering
