@@ -5,7 +5,7 @@ require_relative "lib/gtfs_stops_clustering/version"
 Gem::Specification.new do |spec|
   spec.name = "gtfs_stops_clustering"
   spec.version = GtfsStopsClustering::VERSION
-  spec.authors = ["Visco01"]
+  spec.authors = ["Pietro Visconti"]
   spec.email = ["pietro.visconti2001@gmail.com"]
 
   spec.summary = "A gem to read GTFS stops data and create clusters based on coordinates and stop names' similarities."

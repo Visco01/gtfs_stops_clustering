@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 # lib/input_consistency_checks.rb
 
-
+# InputConsistencyChecks module
 module InputConsistencyChecks
-
+  # InputConsistencyChecks class
   class InputConsistencyChecks
     attr_accessor :gtfs_paths, :epsilon, :min_points, :names_similarity, :stops_config_path
 

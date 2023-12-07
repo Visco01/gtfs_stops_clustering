@@ -18,6 +18,8 @@ module GtfsStopsClustering
   # GtfsStopsClustering class
   class GtfsStopsClustering
     include InputConsistencyChecks
+    include DataImport
+    include DBSCAN
     attr_accessor :clusters, :gtfs_paths, :gtfs_stops, :stops_config_path, :epsilon, :min_points, :names_similarity
 
     def initialize(gtfs_paths, epsilon, min_points, names_similarity, stops_config_path)

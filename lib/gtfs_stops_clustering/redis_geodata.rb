@@ -1,17 +1,21 @@
-# lib/redis_geodata.rb
-require 'redis'
+# frozen_string_literal: true
 
+# lib/gtfs_stops_clustering/redis_geodata.rb
+
+require "redis"
+
+# RedisGeodata module
 module RedisGeodata
-  VERSION='0.0.1'
   attr_accessor :redis
 
+  # RedisGeodata class
   class RedisGeodata
     attr_accessor :stops, :key, :redis, :epsilon
 
     def initialize(stops, epsilon)
-      @redis = Redis.new(url: 'redis://127.0.0.1:6379')
+      @redis = Redis.new(url: "redis://127.0.0.1:6379")
       @stops = stops
-      @key = 'stops'
+      @key = "stops"
       @epsilon = epsilon
       geoadd
     end
@@ -22,8 +26,8 @@ module RedisGeodata
     end
 
     def geosearch(longitude, latitude)
-      list = @redis.georadius(@key, longitude, latitude, @epsilon, 'km')
-      list.reject! { |point| point == longitude.to_s + "," + latitude.to_s }
+      list = @redis.georadius(@key, longitude, latitude, @epsilon, "km")
+      list.reject! { |point| point == "#{longitude},#{latitude}" }
       list
     end
   end
@@ -36,5 +40,3 @@ module RedisGeodata
     @redis.geosearch(*args)
   end
 end
-
-include RedisGeodata
