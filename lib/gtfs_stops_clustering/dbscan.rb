@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # lib/gtfs_stops_clustering/dbscan.rb
 
 require "distance_measures"
@@ -155,7 +153,7 @@ module DBSCAN
         common_title += " #{words_at_index.first.capitalize}"
       end
 
-      common_title.strip ? common_title : labels.first
+      common_title.strip! ? common_title : labels.first
     end
     def find_cluster_position(cluster)
       total_lat = cluster.map { |e| e.items[0].to_f }.sum

@@ -1,0 +1,4 @@
+stop_name,cluster_name
+Stop Name To Be Changed,Actual Name
+Amargosa Valley (Demo),Amargosa Valley
+E Main St / S Irving St (Demo),E Main St / S Irving St

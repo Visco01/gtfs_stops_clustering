@@ -13,7 +13,11 @@ module RedisGeodata
     attr_accessor :stops, :key, :redis, :epsilon
 
     def initialize(stops, epsilon)
-      @redis = Redis.new(url: "redis://127.0.0.1:6379")
+      begin
+        @redis = Redis.new(url: "redis://127.0.0.1:6379")
+      rescue Redis::CannotConnectError => e
+        raise RuntimeError "Error occurred while connecting to Redis: #{e.message}"
+      end
       @stops = stops
       @key = "stops"
       @epsilon = epsilon
@@ -21,6 +25,7 @@ module RedisGeodata
     end
 
     def geoadd
+      @redis.del(@key)
       @redis.geoadd(@key, *@stops)
       @redis.expire(@key, 100_000_0)
     end
