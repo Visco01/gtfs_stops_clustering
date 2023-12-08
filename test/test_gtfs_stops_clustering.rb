@@ -47,4 +47,12 @@ class GtfsStopClustersTest < Minitest::Test
     assert !second_cluster.nil?
     assert_equal 3, second_cluster.length
   end
+
+  def test_gtfs_file_not_found
+    gtfs_paths = ["/invalid/path/.zip"]
+
+    assert_raises StandardError do
+      build_clusters(gtfs_paths, 0.3, 1, 0.85)
+    end
+  end
 end
