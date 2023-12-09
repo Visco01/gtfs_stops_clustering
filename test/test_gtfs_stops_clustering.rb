@@ -35,6 +35,10 @@ class GtfsStopClustersTest < Minitest::Test
       end
     end
 
+    assert_correct_clusters(clusters)
+  end
+
+  def assert_correct_clusters(clusters)
     stops_not_clustered = clusters[-1]
     assert !stops_not_clustered.nil?
     assert_equal 4, stops_not_clustered.length

@@ -37,19 +37,17 @@ module GtfsStopsClustering
     def create_stops_merged
       gtfs_stops = []
       @gtfs_paths.each do |gtfs_path|
-        begin
-          gtfs = GTFS::Source.build(gtfs_path)
-          gtfs_stops << gtfs.stops
-        rescue GTFS::InvalidSourceException => e
-          raise IOError "Error occurred while building GTFS from #{gtfs_path}: #{e.message}"
-        end
+        gtfs = GTFS::Source.build(gtfs_path)
+        gtfs_stops << gtfs.stops
+      rescue GTFS::InvalidSourceException => e
+        raise IOError "Error occurred while building GTFS from #{gtfs_path}: #{e.message}"
       end
       gtfs_stops.flatten
     end
 
     def clusterize_stops
       data = import_stops_data(@gtfs_stops, @stops_config_path)
-      @clusters = DBSCAN(data[:stops_data],
+      @clusters = dbscan(data[:stops_data],
                          data[:stops_redis_geodata],
                          epsilon: @epsilon,
                          min_points: @min_points,

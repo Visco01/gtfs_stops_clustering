@@ -4,6 +4,7 @@ require "distance_measures"
 require "text"
 require "geocoder"
 require_relative "redis_geodata"
+require_relative "utils"
 
 # Array class
 class Array
@@ -50,31 +51,26 @@ module DBSCAN
 
         if neighbors.size >= options[:min_points]
           current_cluster += 1
-          point.cluster = current_cluster
-          cluster = [point].push(add_connected(neighbors, current_cluster))
-          clusters[current_cluster] = cluster.flatten
-
-          # Get Cluster Name
-          labels = clusters[current_cluster].map { |e| e.label.capitalize }
-          cluster_name = find_cluster_name(labels)
-
-          # Get Cluster Position
-          cluster_pos = find_cluster_position(clusters[current_cluster])
-
-          clusters[current_cluster].each do |e|
-            e.cluster_name = cluster_name
-            e.cluster_pos = cluster_pos
-          end
+          create_cluster(current_cluster, point, neighbors)
+          update_cluster_info(current_cluster)
         else
           clusters[-1].push(point)
         end
       end
     end
 
-    def results
-      hash = {}
-      @clusters.dup.each { |cluster_index, value| hash[cluster_index] = value.flatten.map(&:items) unless value.flatten.empty? }
-      hash
+    def create_cluster(cluster_index, point, neighbors)
+      point.cluster = cluster_index
+      cluster = [point].push(add_connected(neighbors, cluster_index))
+      @clusters[cluster_index] = cluster.flatten
+    end
+
+    def update_cluster_info(cluster_index)
+      labels = @clusters[cluster_index].map { |e| e.label.capitalize }
+      @clusters[cluster_index].each do |e|
+        e.cluster_name = Utils.find_cluster_name(labels)
+        e.cluster_pos = Utils.find_cluster_position(clusters[cluster_index])
+      end
     end
 
     def labeled_results
@@ -103,16 +99,10 @@ module DBSCAN
       neighbors = []
       geosearch_results = geosearch(point.items[1], point.items[0])
       geosearch_results.each do |neighbor_pos|
-        coordinates = neighbor_pos.split(",")
-        neighbor = @points.find do |elem|
-          elem.items[0] == coordinates[1] &&
-            elem.items[1] == coordinates[0]
-        end
+        neighbor = Utils.find_inmediate_neighbor(neighbor_pos, @points)
         next unless neighbor
 
-        string_distance = Text::Levenshtein.distance(point.label.downcase, neighbor.label.downcase)
-        similarity = 1 - string_distance.to_f / [point.label.length, point.label.length].max
-        neighbors.push(neighbor) if similarity > options[:similarity]
+        neighbors.push(neighbor) if Utils.string_similarity(point.label.downcase, neighbor.label.downcase) > options[:similarity]
       end
       neighbors
     end
@@ -139,30 +129,8 @@ module DBSCAN
 
       cluster_points
     end
-
-    def find_cluster_name(labels)
-      words = labels.map { |label| label.strip.split }
-      common_title = ""
-
-      # Loop through each word index starting from the first
-      (0...words.first.length).each do |i|
-        words_at_index = words.map { |word_list| word_list[i] }
-
-        break unless words_at_index.uniq.length == 1
-
-        common_title += " #{words_at_index.first.capitalize}"
-      end
-
-      common_title.strip! ? common_title : labels.first
-    end
-    def find_cluster_position(cluster)
-      total_lat = cluster.map { |e| e.items[0].to_f }.sum
-      total_lon = cluster.map { |e| e.items[1].to_f }.sum
-      avg_lat = total_lat / cluster.size
-      avg_lon = total_lon / cluster.size
-      [avg_lat, avg_lon]
-    end
   end
+
   # Point class
   class Point
     attr_accessor :items, :cluster, :visited, :label, :cluster_name, :cluster_pos
@@ -182,7 +150,7 @@ module DBSCAN
     end
   end
 
-  def DBSCAN(* args)
+  def dbscan(* args)
     clusterer = Clusterer.new(*args)
     clusterer.labeled_results
   end

@@ -31,8 +31,8 @@ jobs:
       uses: supercharge/redis-github-action@1.7.0
     - name: Bundle install
       run: |
-        bundle install --full-index --redownload
+        bundle install
+    - name: Run the default task
+      run: bundle exec rake
     - name: Run tests
-      run: ruby test/test_gtfs_stops_clustering.rb
-    # - name: Run the default task
-    #   run: bundle exec rake
+      run: ruby -Itest -e 'ARGV.each { |f| require "./#{f}" if File.file?(f) }' test/**/test_*.rb
