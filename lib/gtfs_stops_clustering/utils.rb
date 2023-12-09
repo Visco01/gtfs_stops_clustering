@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # lib/utils.rb
 
 # Utils class
