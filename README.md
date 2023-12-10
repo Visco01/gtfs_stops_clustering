@@ -1,4 +1,5 @@
-# GTFS Stops clustering
+# GTFS Stops clustering 
+[![Gem Version](https://badge.fury.io/rb/gtfs_stops_clustering.svg)](https://badge.fury.io/rb/gtfs_stops_clustering)
 
 GTFS Stops Clustering is a Ruby Gem designed to read [GTFS](https://gtfs.org) (General Transit Feed Specification) stops data and create clusters based on the following parameters:
 
@@ -57,7 +58,7 @@ include GtfsStopsClustering
 
 gtfs_paths = ["path/to/gtfs/zip"]
 
-clusters = build_clusters(urls, 0.3, 1, 0.85)
+clusters = build_clusters(gtfs_paths, 0.3, 1, 0.85)
 
 clusters.each do |index, cluster|
   puts index
