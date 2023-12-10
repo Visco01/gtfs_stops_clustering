@@ -9,7 +9,7 @@ GTFS Stops Clustering is a Ruby Gem designed to read [GTFS](https://gtfs.org) (G
 - `Stop config file` (CSV file path) [Optional]: This file is specifically designed to handle certain cases where stop names need to be altered or mapped to different names before running the clustering algorithm. Each entry consists of two columns:
 **stop_name**: This column contains the original name of the stop that requires modification or mapping to another name. **cluster_name**: This column specifies the name to which the original stop name should be changed or mapped during the clustering process.
 
-It utilizes the [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN) Density-Based algorithm to perform clustering.
+It utilizes the [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN) Density-Based algorithm to perform clustering. I based my core algorithm on the gem [Dbscan](https://github.com/matiasinsaurralde/dbscan)
 
 ### Stops config file example
 
@@ -26,7 +26,7 @@ In this case, passing this CSV file to the clustering algorithm, **Amargosa Vall
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
+Add this line to your application's Gemfile:
 
 ```ruby
 gem 'gtfs_stops_clustering', '~> 0.1.5'
