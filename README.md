@@ -1,9 +1,14 @@
-# GtfsStopsClustering
+# GTFS Stops clustering
 
-TODO: Delete this and the text below, and describe your gem
+GTFS Stops Clustering is a Ruby Gem designed to read [GTFS](https://gtfs.org) (General Transit Feed Specification) stops data and create clusters based on the following parameters:
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gtfs_stops_clustering`. To experiment with that code, run `bin/console` for an interactive prompt.
+- **Epsilon** (float): the maximum distance (in km) between 2 stops for them to be considered neighbors of one another (e.g.: 0.01, 0.5, 2 etc.)
+- **Min Points** (int): the minimum number of neighbors a point needs to have to be considered a core point (e.g.: 3, 5, 10 etc.)
+- **Names Similarity** (string): Besides geographical proximity, the algorithm also considers the similarity between stop names using techniques like string similarity measures. This enhances the clustering by including stops with similar names within the same cluster (e.g.: all values between 0 and 1. The more the value is in proximity of 1, the more similar the stop names need to be considered points of the same cluster). The default value is 1, so if you want to create clusters based only on stop positions, leave this to 0.
+- **Stop config file** (CSV file path): This file is specifically designed to handle certain cases where stop names need to be altered or mapped to different names before running the clustering algorithm. Each entry consists of two columns:
+**stop_name**: This column contains the original name of the stop that requires modification or mapping to another name. **cluster_name**: This column specifies the name to which the original stop name should be changed or mapped during the clustering process.
 
+It utilizes the [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN) Density-Based algorithm to perform clustering.
 ## Installation
 
 TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
