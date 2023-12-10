@@ -40,16 +40,21 @@ class GtfsStopClustersTest < Minitest::Test
 
   def assert_correct_clusters(clusters)
     stops_not_clustered = clusters[-1]
-    assert !stops_not_clustered.nil?
-    assert_equal 4, stops_not_clustered.length
+    assert_correct_cluster(stops_not_clustered, nil, 4)
 
     first_cluster = clusters[0]
-    assert !first_cluster.nil?
-    assert_equal 2, first_cluster.length
+    assert_correct_cluster(first_cluster, "Awesome Stop Name", 2)
 
     second_cluster = clusters[1]
-    assert !second_cluster.nil?
-    assert_equal 3, second_cluster.length
+    assert_correct_cluster(second_cluster, "Nye County Airport", 3)
+  end
+
+  def assert_correct_cluster(cluster, cluster_name, cluster_size)
+    assert !cluster.nil?
+    assert_equal cluster_size, cluster.length
+    cluster.each do |stop|
+      assert_equal cluster_name, stop[:cluster_name]
+    end
   end
 
   def test_gtfs_file_not_found
