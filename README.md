@@ -24,6 +24,12 @@ E Main St / S Irving St (Demo),E Main St / S Irving St
 
 In this case, passing this CSV file to the clustering algorithm, **Amargosa Valley (Demo)** will be renamed **Amargarosa Valley**, and so on for all the entries provided. The reason why I needed to implement this feature is simply because I was dealing with bad stops names (typo) provided by default within the GTFS I was working on.
 
+## Requirements
+
+It is essential to have a **Redis server instance running locally** because the algorithm leverages Redis geospatial queries for efficient spatial operations.
+The Redis server is utilized to optimize geospatial queries, allowing the clustering algorithm to efficiently process proximity-related computations required during the clustering process.
+Please ensure that a Redis server is installed and running on your local machine to utilize the gem effectively.
+
 ## Installation
 
 Add this line to your application's Gemfile:
