@@ -27,7 +27,7 @@ In this case, passing this CSV file to the clustering algorithm, **Amargosa Vall
 
 ## Requirements
 
-It is essential to have a **Redis server instance running locally** because the algorithm leverages Redis geospatial queries for efficient spatial operations.
+It is essential to have a **Redis server instance running locally (on default port 6379)** because the algorithm leverages Redis geospatial queries for efficient spatial operations.
 The Redis server is utilized to optimize geospatial queries, allowing the clustering algorithm to efficiently process proximity-related computations required during the clustering process.
 Please ensure that a Redis server is installed and running on your local machine to utilize the gem effectively.
 

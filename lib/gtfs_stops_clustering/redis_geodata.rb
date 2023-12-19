@@ -22,6 +22,7 @@ module RedisGeodata
       @key = "stops"
       @epsilon = epsilon
       geoadd
+      ObjectSpace.define_finalizer(self, proc { @redis.del(@key) })
     end
 
     def geoadd
