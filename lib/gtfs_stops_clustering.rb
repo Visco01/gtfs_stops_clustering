@@ -61,6 +61,7 @@ module GtfsStopsClustering
       @clusters.each_value do |cluster|
         cluster.each do |stop|
           gtfs_stop = @gtfs_stops.find { |e| e.lat == stop[:stop_lat] && e.lon == stop[:stop_lon] }
+          stop[:stop_name] = gtfs_stop.name
           stop[:stop_id] = gtfs_stop.id
           stop[:stop_code] = gtfs_stop.code
           stop[:parent_station] = gtfs_stop.parent_station

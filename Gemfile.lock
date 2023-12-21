@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gtfs_stops_clustering (0.1.5)
+    gtfs_stops_clustering (0.1.7)
       csv (~> 3.2, >= 3.2.8)
       distance_measures (~> 0.0.6)
       geocoder (~> 1.8, >= 1.8.2)
