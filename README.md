@@ -23,7 +23,7 @@ Amargosa Valley (Demo),Amargosa Valley
 E Main St / S Irving St (Demo),E Main St / S Irving St
 ```
 
-In this case, passing this CSV file to the clustering algorithm, **Amargosa Valley (Demo)** will be renamed **Amargarosa Valley**, and so on for all the entries provided. The reason why I needed to implement this feature is simply because I was dealing with bad stops names (typo) provided by default within the GTFS I was working on.
+In this case, passing this CSV file to the clustering algorithm, **Amargosa Valley (Demo)** will be renamed **Amargarosa Valley**, and so on for all the entries provided. The reason why I needed to implement this feature is simply because I was dealing with bad stops names (typo) provided by default within the GTFS I was working on. [v0.1.7] After performing the algorithm, the original gtfs stops names will be restored.
 
 ## Requirements
 
