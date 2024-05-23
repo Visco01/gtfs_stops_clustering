@@ -36,7 +36,7 @@ Please ensure that a Redis server is installed and running on your local machine
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'gtfs_stops_clustering', '~> 0.1.5'
+gem 'gtfs_stops_clustering', '~> 0.1.7'
 ```
 And run the following command
 
